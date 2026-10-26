@@ -2,13 +2,13 @@
   "displayName": "arrow.",
   "bundleId": "com.sourspark.bilgiedu",
   "version": "1.0.0",
-  "build": "2",
+  "build": "3",
   "primaryLanguage": "tr-TR",
   "testerGroup": "BilgiEdu Testers",
   "distribution": "external-testflight",
   "signInRequired": false,
   "betaDescription": "arrow. ile sakin bir ok bulmacası deneyimi. Okların önünü aç, tüm okları tahtadan çıkar ve yeni seviyelerin kilidini aç. Üç can, ipuçları ve cihazda kaydedilen seviye ilerlemesiyle kendi hızında oyna. İnternet bağlantısı veya hesap gerektirmez.",
-  "whatToTest": "Ana sayfa ve seviyeler arası geçişleri; okların dokunma hassasiyetini ve çıkış animasyonlarını; engelli oklarda can azalmasını; ipucu ve yeniden başlatmayı; seviye tamamlanınca sıradaki seviyenin açılmasını; uygulamayı kapatıp açınca tamamlanan seviyelerin korunmasını test edin. Farklı iPhone ve iPad ekranlarında taşma, donma veya beklenmeyen kapanma varsa TestFlight üzerinden bildirin. Tamamlanmamış bir tahtadan çıkıldığında o tahta yeniden başlar.",
+  "whatToTest": "Okların çıkış animasyonu yenilendi: baş çıkış yönünde ilerlerken gövde ve kuyruk aynı yolu yılan gibi takip eder. Özellikle çok kıvrımlı okları, dört çıkış yönünü, son okun tamamen çıkmasıyla seviye tamamlanmasını ve yeniden başlatmayı test edin. Ana sayfa ve seviyeler arası geçişleri, can ve ipuçlarını, cihazda kaydedilen ilerlemeyi de kontrol edin. Sorunları TestFlight üzerinden bildirin.",
   "reviewNotes": "This is an offline arrow puzzle game. No account, sign-in, payment, ads or external hardware is required. Tap Oyuna başla (or Devam et) on the home screen. Tap an arrow whose forward path is clear to remove it. Tapping a blocked arrow costs one heart. Remove every arrow to finish the level. İpucu highlights a removable arrow. The pause menu offers resume and restart. Completed levels and best results are stored locally. Boards and graphics are original; the level catalogue uses imported numeric ordering only.",
   "feedbackEmail": null,
   "reviewContact": {
@@ -17,9 +17,14 @@
     "email": null,
     "phoneNumber": null
   },
-  "status": "WAITING_FOR_BETA_REVIEW",
+  "status": "READY_TO_SUBMIT_AFTER_PREVIOUS_BETA_REVIEW",
   "appStoreConnectId": "6826133987",
   "appStoreConnectName": "BilgiEdu",
   "publicLink": "https://testflight.apple.com/join/7x6bR88c",
-  "githubUrl": "https://github.com/cagdaseksi/BilgiEdu2"
+  "githubUrl": "https://github.com/cagdaseksi/BilgiEdu2",
+  "externalReviewBlocker": "Apple permits one beta build in review at a time; build 2 is waiting for review. Submit build 3 after that review finishes.",
+  "internalTesting": {
+    "group": "BilgiEdu Internal",
+    "status": "TESTING"
+  }
 }
