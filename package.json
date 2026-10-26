@@ -1,19 +1,23 @@
 {
   "name": "BilgiEdu2",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
-    "android": "react-native run-android",
-    "ios": "react-native run-ios",
+    "android": "react-native run-android --port 8082",
+    "ios": "react-native run-ios --port 8082",
     "lint": "eslint .",
-    "start": "react-native start",
-    "test": "jest"
+    "start": "react-native start --port 8082",
+    "test": "jest",
+    "ios:release": "react-native run-ios --mode Release --no-packager",
+    "ios:archive": "bash scripts/ios-testflight.sh archive",
+    "ios:export": "bash scripts/ios-testflight.sh export"
   },
   "dependencies": {
+    "@react-native-async-storage/async-storage": "^3.1.1",
     "react": "19.3.0",
     "react-native": "0.88.0",
-    "@react-native/new-app-screen": "0.88.0",
-    "react-native-safe-area-context": "^5.5.2"
+    "react-native-safe-area-context": "^5.10.1",
+    "react-native-svg": "^15.16.0"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
