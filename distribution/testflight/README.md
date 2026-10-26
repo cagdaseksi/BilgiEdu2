@@ -8,6 +8,8 @@ Oyun: **arrow.** · App Store Connect kaydı: **BilgiEdu** · Apple ID: **682613
 
 Dış test grubu **BilgiEdu Testers** olarak adlandırılır. Bağlantının mevcut olması, grupta onaylanmış oynanabilir build bulunduğu anlamına gelmez. İlk dış test build'i Apple beta incelemesine tabidir. Kullanıcıların TestFlight uygulamasını kurması gerekir; UDID toplamak gerekmez.
 
+26 Ekim 2026: **1.0.0 (2)** yüklemesi tamamlandı ve dış test grubuna eklendi. Apple durumu **Waiting for Review**; onay sonrası testçilere otomatik bildirim açık. Public bağlantı herkesin katılımına açık olarak yapılandırıldı; katılım Apple onayından sonra kullanılabilir.
+
 ## Çalıştırma ve yerel kontroller
 
 ```sh

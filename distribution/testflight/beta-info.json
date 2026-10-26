@@ -17,7 +17,7 @@
     "email": null,
     "phoneNumber": null
   },
-  "status": "BUILD_UPLOAD_IN_PROGRESS",
+  "status": "WAITING_FOR_BETA_REVIEW",
   "appStoreConnectId": "6826133987",
   "appStoreConnectName": "BilgiEdu",
   "publicLink": "https://testflight.apple.com/join/7x6bR88c",
