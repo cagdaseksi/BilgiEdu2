@@ -5,7 +5,7 @@ PROJECT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$PROJECT_ROOT"
 TASK="${1:-archive}"
 VERSION="$(node -p "require('./package.json').version")"
-BUILD_NUMBER="${IOS_BUILD_NUMBER:-2}"
+BUILD_NUMBER="${IOS_BUILD_NUMBER:-3}"
 if [[ ! "$BUILD_NUMBER" =~ ^[1-9][0-9]*$ ]]; then
   echo 'IOS_BUILD_NUMBER must be a positive integer.' >&2
   exit 1

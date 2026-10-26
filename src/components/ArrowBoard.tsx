@@ -1,35 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { Animated, Easing, StyleSheet, View } from 'react-native';
 import Svg, { Circle, G, Path } from 'react-native-svg';
-import { Arrow, Cell, Puzzle } from '../game/engine';
+import { Arrow, Puzzle } from '../game/engine';
+import { arrowFrame, createArrowRoute } from '../game/arrowPath';
 import { colors } from '../theme';
-
-const point = (cell: Cell) => ({ x: (cell.x + 1) * 32, y: (cell.y + 1) * 32 });
-function pathFor(arrow: Arrow) {
-  const points = arrow.cells.map(point);
-  let body = `M${points[0].x},${points[0].y}`;
-  for (let i = 1; i < points.length - 1; i++) {
-    const a = points[i - 1];
-    const b = points[i];
-    const c = points[i + 1];
-    const before = {
-      x: b.x - Math.sign(b.x - a.x) * 6,
-      y: b.y - Math.sign(b.y - a.y) * 6,
-    };
-    const after = {
-      x: b.x + Math.sign(c.x - b.x) * 6,
-      y: b.y + Math.sign(c.y - b.y) * 6,
-    };
-    body += ` L${before.x},${before.y} Q${b.x},${b.y} ${after.x},${after.y}`;
-  }
-  const head = points[points.length - 1];
-  const { x: dx, y: dy } = arrow.direction;
-  body += ` L${head.x},${head.y}`;
-  const wing1 = { x: head.x - dx * 7 - dy * 7, y: head.y - dy * 7 + dx * 7 };
-  const wing2 = { x: head.x - dx * 7 + dy * 7, y: head.y - dy * 7 - dx * 7 };
-  const tip = `M${wing1.x},${wing1.y} L${head.x},${head.y} L${wing2.x},${wing2.y}`;
-  return { body, tip };
-}
 
 function ArrowGlyph({
   arrow,
@@ -50,27 +24,32 @@ function ArrowGlyph({
 }) {
   const animation = useRef(new Animated.Value(0)).current;
   const [fraction, setFraction] = useState(0);
+  const route = useMemo(() => createArrowRoute(arrow, extent), [arrow, extent]);
+  const exitCallback = useRef(onExit);
+  exitCallback.current = onExit;
   useEffect(() => {
     if (!exiting) {
+      animation.setValue(0);
+      setFraction(0);
       return;
     }
     const listener = animation.addListener(({ value }) => setFraction(value));
     Animated.timing(animation, {
       toValue: 1,
-      duration: 300,
-      easing: Easing.in(Easing.quad),
+      duration: Math.max(450, route.travel / 0.55),
+      easing: Easing.linear,
       useNativeDriver: false,
     }).start(({ finished }) => {
       if (finished) {
-        onExit?.(arrow.id);
+        exitCallback.current?.(arrow.id);
       }
     });
     return () => {
       animation.stopAnimation();
       animation.removeListener(listener);
     };
-  }, [animation, arrow.id, exiting, onExit]);
-  const { body, tip } = pathFor(arrow);
+  }, [animation, arrow.id, exiting, route.travel]);
+  const { body, tip } = arrowFrame(route, fraction);
   return (
     <G
       testID={`arrow-${arrow.id}`}
@@ -82,10 +61,6 @@ function ArrowGlyph({
           : undefined
       }
       onPress={interactive && !exiting ? () => onPress?.(arrow.id) : undefined}
-      opacity={1 - fraction}
-      transform={`translate(${arrow.direction.x * fraction * extent} ${
-        arrow.direction.y * fraction * extent
-      })`}
     >
       {interactive && (
         <Path
